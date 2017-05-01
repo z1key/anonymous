@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html mlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Sign In</title>
+    <th:block th:replace="fragments/head::head"></th:block>
+    <script src="https://www.google.com/recaptcha/api.js?onload=recaptchaOnLoad&render=explicit" async defer></script>
+</head>
+
+<body th:with="page='login'">
+<div th:replace="fragments/header :: header"></div>
+<form name="login-form" class="form-narrow form-horizontal" action="/login" method="post" th:action="@{/login}">
+    <th:block th:if="${param.error != null}">
+        <div th:replace="fragments/alert :: alert (type='danger', message=#{login.fail})">Alert</div>
+    </th:block>
+    <fieldset>
+        <legend>Please Sign In</legend>
+        <div class="form-group">
+            <label for="inputName" class="col-lg-2 control-label">username</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputName" placeholder="username" name="j_username"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+            <div class="col-lg-10">
+                <input type="password" class="form-control" id="inputPassword" placeholder="Password"
+                       name="j_password"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="remember-me"/> Remember me
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+                <button id="recaptcha1" type="submit" class="g-recaptcha btn btn-secondary" data-size="invisible" th:attr="data-sitekey=${@environment.getProperty('recaptcha.validation.siteKey')}" data-callback="onLoginSubmit" >Sign in</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+                <p>Forgot password? <a href="#" data-toggle="modal" data-target="#forgotPassModal">Restore</a></p>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+                <p>New here? <a href="signup" th:href="@{/signup}">Sign Up</a></p>
+            </div>
+        </div>
+    </fieldset>
+</form>
+<!-- Modal -->
+<div class="modal fade" id="forgotPassModal" tabindex="-1" role="dialog" aria-labelledby="forgotPassModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="loading"></div>
+            <div class="modal-header">
+                <h5 class="modal-title" id="forgotPassModalLabel">Forgot Password?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="restore-password-modal" class="modal-body" th:include="fragments/restore-password::email-form">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button id="recaptcha2" class="g-recaptcha btn btn-primary" data-badge="inline" data-size="invisible" data-callback="onRestorePasswordSubmit" type="button">Submit
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var sitekey = "[[${@environment.getProperty('recaptcha.validation.siteKey')}]]";
+    var recaptcha1, recaptcha2;
+    function onLoginSubmit(token) {
+        document.forms.namedItem("login-form").submit();
+    }
+    function onRestorePasswordSubmit(token) {
+        restorePasswordAjax(passwordForm);
+    }
+    function recaptchaOnLoad() {
+        recaptcha1 = grecaptcha.render('recaptcha1', {
+            'sitekey' : sitekey, //Replace this with your Site key
+            'callback': onLoginSubmit
+        });
+
+        //Render the recaptcha2 on the element with ID "recaptcha2"
+        recaptcha2 = grecaptcha.render('recaptcha2', {
+            'sitekey' : sitekey, //Replace this with your Site key
+            'callback': onRestorePasswordSubmit
+        });
+    }
+</script>
+</body>
+</html>

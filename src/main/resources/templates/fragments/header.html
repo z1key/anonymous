@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <th:block th:replace="fragments/head::head"></th:block>
+</head>
+<!-- Navbar -->
+<nav th:classappend="${#authorization.expression('hasRole(''ADMIN'')')} ? 'bg-faded':'bg-inverse'" class="navbar navbar-toggleable-md navbar-inverse fixed-top" th:fragment="header">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarContainer" aria-controls="navbarContainer" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+            <img th:src="@{resources/images/logo_l.png}" alt="" width="50" height="50" style="position: absolute;top: 0;left: 0;">
+            <a class="navbar-brand" href="/" th:text="#{project.name}" th:href="@{/}"></a>
+        <div class="navbar-collapse collapse" id="navbarContainer" aria-expanded="false">
+            <p sec:authorize="isAuthenticated()" th:inline="text" class="greetings">[[#{dialog.welcome}]], [[${#authentication.name}]]!</p>
+            <ul class="navbar-nav mr-auto">
+                <li th:classappend="${page == 'hello' ? 'active' : ''}" class="nav-item"><a href="#" th:href="@{/hello}" class="nav-link">Hello</a></li>
+            </ul>
+            <ul class="navbar-nav navbar-hr">
+                <li th:if="__${#locale}__!='en'"><a href="javascript:setLang('en');" class="nav-link">EN</a></li>
+                <li th:if="__${#locale}__!='ru'"><a href="javascript:setLang('ru');" class="nav-link">RU</a></li>
+            </ul>
+            <ul th:if="${page != 'login'}" class="navbar-nav">
+                <li th:if="${page != 'signup'}" sec:authorize="!isAuthenticated()" class="nav-item"><button th:onclick="${'javascript:window.location.href = ''signup'''}" class="btn btn-signup btn-sm btn-outline-secondary" th:text="#{button.signup}">Sign Up</button></li>
+                <li th:if="${page != 'profile'}" sec:authorize="isAuthenticated()" class="nav-item"><a th:href="@{/profile}" th:text="#{button.profile}" class="nav-link">Profile</a></li>
+                <li sec:authorize="!isAuthenticated()" class="nav-item"><a th:href="@{/login}" th:text="#{button.signin}" class="nav-link">Sign in</a></li>
+                <li sec:authorize="isAuthenticated()" class="nav-item"><a th:href="@{/logout}" th:text="#{button.logout}" class="nav-link">Logout</a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+    <script type="text/javascript">
+        function setLang(locale) {
+            var url = window.location.pathname;
+            window.location.href = url + "?" + $.param({"lang": locale});
+        }
+    </script>
+</nav>
+
+</html>

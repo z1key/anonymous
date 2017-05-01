@@ -1,0 +1,13 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>404 Not Found</title>
+    <th:block th:replace="fragments/head::head"></th:block>
+</head>
+<body>
+<div class="container">
+    <h3>404 Not Found</h3>
+    <p>The requested URI (<span th:utext="${#vars['javax.servlet.error.request_uri']}">N/A</span>) not found</p>
+    <a href="/" th:href="@{/home}">Back to Home Page</a>
+</div>
+</body>
+</html>

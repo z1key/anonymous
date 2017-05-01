@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <th:block th:replace="fragments/head::head"></th:block>
+    <title>Anonymous</title>
+</head>
+<body>
+<th:block th:replace="fragments/header :: header">
+</th:block>
+<div class="container">
+    <div>
+        <h1>Test</h1>
+        <p>
+            Welcome to the Spring MVC Quickstart application!
+            Get started quickly by signing up.
+        </p>
+        <p>
+            <a href="/signup" th:href="@{/signup}" class="btn btn-lg btn-success" th:text="#{button.signup}">Sign up</a>
+        </p>
+    </div>
+</div>
+<div th:replace="fragments/footer :: ${#authorization.expression('hasRole(''ADMIN'')')} ? 'footer-admin' : 'footer'">&copy; 2017 The Static Templates</div>
+</body>
+</html>

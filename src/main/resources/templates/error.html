@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <th:block th:replace="fragments/head::head"></th:block>
+    <title>500 - Internal Server Error</title>
+</head>
+<body th:with="message = ${message}, stackTrace = ${stackTrace}">
+<div class="container" th:object="${exception}">
+<h3>500 - Internal Server Error</h3>
+<p th:text="${message}"></p>
+<span th:each="m : ${stackTrace}">
+    at [[${m}]] <br>
+</span>
+</div>
+</body>
+</html>

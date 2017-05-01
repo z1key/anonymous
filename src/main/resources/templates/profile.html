@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <th:block th:replace="fragments/head::head"></th:block>
+    <title>Title</title>
+</head>
+<body th:with="page = 'profile'">
+<th:block th:replace="fragments/header :: header"></th:block>
+</body>
+</html>
