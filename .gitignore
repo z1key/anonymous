@@ -1,5 +1,18 @@
 
-/.idea/**
-/target/**
-/Anonymous.iml
-/.gitignore
+.idea/**
+target/**
+Anonymous.iml
+.gitignore
+${CATALINA_HOME}/
+src/main/java/org/z1key/projects/util/Singleton.java
+src/main/webapp/resources/css/bootstrap-grid.css
+src/main/webapp/resources/css/bootstrap-grid.css.map
+src/main/webapp/resources/css/bootstrap-reboot.css
+src/main/webapp/resources/css/bootstrap-reboot.css.map
+src/main/webapp/resources/css/bootstrap.css
+src/main/webapp/resources/css/bootstrap.css.map
+src/main/webapp/resources/css/tether-theme-arrows-dark.min.css
+src/main/webapp/resources/css/tether-theme-arrows.min.css
+src/main/webapp/resources/css/tether-theme-basic.min.css
+src/main/webapp/resources/css/tether.min.css
+target/

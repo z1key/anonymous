@@ -60,6 +60,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter implements ApplicationCon
         registry.addViewController("/error").setViewName("error");
     }
 
+
     @Bean
     public ViewResolver viewResolver() {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();

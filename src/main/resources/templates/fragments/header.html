@@ -21,9 +21,9 @@
                 <li th:if="__${#locale}__!='ru'"><a href="javascript:setLang('ru');" class="nav-link">RU</a></li>
             </ul>
             <ul th:if="${page != 'login'}" class="navbar-nav">
-                <li th:if="${page != 'signup'}" sec:authorize="!isAuthenticated()" class="nav-item"><button th:onclick="${'javascript:window.location.href = ''signup'''}" class="btn btn-signup btn-sm btn-outline-secondary" th:text="#{button.signup}">Sign Up</button></li>
+                <li th:if="${page != 'signup'}" sec:authorize="!isAuthenticated()" class="nav-item"><button th:onclick="${'javascript:window.location.href = ''signup'''}" class="btn btn-signup btn-sm btn-outline-success" th:text="#{button.signup}">Sign Up</button></li>
                 <li th:if="${page != 'profile'}" sec:authorize="isAuthenticated()" class="nav-item"><a th:href="@{/profile}" th:text="#{button.profile}" class="nav-link">Profile</a></li>
-                <li sec:authorize="!isAuthenticated()" class="nav-item"><a th:href="@{/login}" th:text="#{button.signin}" class="nav-link">Sign in</a></li>
+                <li sec:authorize="!isAuthenticated()" class="nav-item"><a th:href="@{/login}" th:text="#{button.signin}" class="btn btn-sm btn-outline-secondary" role="button">Sign in</a></li>
                 <li sec:authorize="isAuthenticated()" class="nav-item"><a th:href="@{/logout}" th:text="#{button.logout}" class="nav-link">Logout</a></li>
             </ul>
         </div>

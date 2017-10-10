@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <th:block th:fragment="post(post)">
+        <div class="post wrapper">
+            <div class="heading">
+                <!--<div class="logo"></div>-->
+                <p class="subject" th:text="${post.subject}">Lorem ipsum dolor sit amet</p>
+                <hr>
+            </div>
+            <div class="body">
+                <p class="text" th:text="${post.text}">Lorem ipsum dolor sit amet</p>
+                <hr>
+            </div>
+            <div class="footer row">
+                <div class="col-6" style="text-align: left;">
+                    <p class="created col-6" th:text="${#dates.format(post.postTime, 'dd-MM-yyyy hh:mm')}">29-09-1991 13:58</p>
+                </div>
+                <div class="col-6" style="text-align: right">
+                    <a class="col-6" href="#" th:attr="data-id = ${post.id}" th:text="#{button.post.comment}">Comment</a>
+                </div>
+            </div>
+            <ul class="comment-container" th:each="comment : ${post.comments}">
+                <li th:include="comment(${comment})"></li>
+            </ul>
+        </div>
+    </th:block>
+    <th:block th:fragment="post-form">
+        <form action="/post-publish" th:action="@{/post-publish}" th:object="${post}">
+            <div class="form-group" th:classappend="${#fields.hasErrors('subject')}? 'has-danger'">
+                <label for="subject">Subject</label>
+                <input id="subject" type="text" th:field="*{subject}" class="form-control"
+                       th:classappend="${#fields.hasErrors('subject')}? 'form-control-danger'">
+                <span class="form-control-feedback" th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}">Incorrect Subject</span>
+            </div>
+            <div class="form-group" th:classappend="${#fields.hasErrors('text')}? 'has-danger'">
+                <label for="text">Subject</label>
+                <textarea id="text" type="text" th:field="*{text}" class="form-control"
+                          th:classappend="${#fields.hasErrors('text')} ? 'form-control-danger'"></textarea>
+                <span class="form-control-feedback" th:if="${#fields.hasErrors('text')}" th:errors="*{text}">Incorrect Subject</span>
+            </div>
+        </form>
+
+    </th:block>
+    <th:block th:fragment="comment(comment)" th:object="comment">
+        <div class="comment-wrapper">
+            <div class="logo"></div>
+            <div class=""><p th:text="*{comment.comentator.pseudonim}"></p><p th:text="${#dates.format(*{comment.postTime}, 'dd-MM-yyyy hh:mm')}"></p><button class="options"></button></div>
+            <div class="text" th:utext="*{comment.text}"></div>
+        </div>
+    </th:block>
+</html>
