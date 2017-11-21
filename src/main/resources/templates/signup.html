@@ -29,7 +29,7 @@
             <label for="login" class="col-sm-4 form-control-label" th:text="#{label.login}">Login</label>
             <div class="col-sm-8">
                 <input type="text" class="form-control"
-                       th:classappend="${#fields.hasErrors('email')}? 'form-control-danger'" id="login"
+                       th:classappend="${#fields.hasErrors('login')}? 'form-control-danger'" id="login"
                        placeholder="Login"
                        th:field="*{login}"/>
                 <span class="form-control-feedback" th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Incorrect Login</span>
@@ -39,7 +39,7 @@
             <label for="password" class="col-sm-4 form-control-label" th:text="#{label.password}">Password</label>
             <div class="col-sm-8">
                 <input type="password" class="form-control" id="password"
-                       th:classappend="${#fields.hasErrors('email')}? 'form-control-danger'" placeholder="Password"
+                       th:classappend="${#fields.hasErrors('password')}? 'form-control-danger'" placeholder="Password"
                        th:field="*{password}"/>
                 <span class="form-control-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Incorrect password</span>
             </div>
@@ -49,7 +49,7 @@
                 password</label>
             <div class="col-sm-8">
                 <input type="password" class="form-control" id="verifyPassword"
-                       th:classappend="${#fields.hasErrors('email')}? 'form-control-danger'" placeholder="Password"
+                       th:classappend="${#fields.hasErrors('verifyPassword')}? 'form-control-danger'" placeholder="Password"
                        th:field="*{verifyPassword}"/>
                 <span class="form-control-feedback" th:if="${#fields.hasErrors('verifyPassword')}"
                       th:errors="*{verifyPassword}"></span>

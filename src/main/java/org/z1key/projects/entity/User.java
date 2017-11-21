@@ -77,7 +77,6 @@ public class User implements DomainObject {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
         }
         return authorities;
-
     }
 
     public String getLogin() {
