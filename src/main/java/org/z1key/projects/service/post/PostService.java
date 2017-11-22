@@ -7,7 +7,6 @@ import org.z1key.projects.entity.User;
 import org.z1key.projects.repository.PostRepository;
 
 import javax.transaction.Transactional;
-import java.util.Set;
 
 @Service
 public class PostService {

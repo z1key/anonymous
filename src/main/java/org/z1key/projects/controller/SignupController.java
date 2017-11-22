@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.z1key.projects.entity.Role;
 import org.z1key.projects.entity.User;
-import org.z1key.projects.repository.UserRepository;
 import org.z1key.projects.service.person.RoleService;
 import org.z1key.projects.service.person.UserService;
 import org.z1key.projects.util.AjaxUtils;
